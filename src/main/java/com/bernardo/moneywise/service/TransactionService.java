@@ -52,6 +52,11 @@ public class TransactionService {
         transactionRepository.delete(transaction);
     }
 
+    public Page<TransactionResponseDTO> searchByCategory(String categoryName, Pageable pageable) {
+        return transactionRepository.findByCategory_NameContainingIgnoreCase(categoryName, pageable)
+                .map(this::toResponseDTO);
+    }
+
     public Page<TransactionResponseDTO> searchByType(TransactionType transactionType, Pageable pageable){
         return transactionRepository.findByType(transactionType, pageable)
                 .map(this::toResponseDTO);
