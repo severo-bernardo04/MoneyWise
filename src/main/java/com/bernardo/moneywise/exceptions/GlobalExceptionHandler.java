@@ -3,6 +3,7 @@ package com.bernardo.moneywise.exceptions;
 import com.bernardo.moneywise.dto.ErrorResponseDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -53,5 +54,10 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now(), status.value(), status.getReasonPhrase(), message, details
         );
         return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponseDTO> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+        return build(HttpStatus.CONFLICT, "Essa operação viola a condição de dados (ex: nome duplicado no banco)", null);
     }
 }

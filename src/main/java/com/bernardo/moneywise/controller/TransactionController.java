@@ -3,13 +3,12 @@ package com.bernardo.moneywise.controller;
 import com.bernardo.moneywise.dto.TransactionRequestDTO;
 import com.bernardo.moneywise.dto.TransactionResponseDTO;
 import com.bernardo.moneywise.enums.TransactionType;
-import com.bernardo.moneywise.repository.TransactionRepository;
-import com.bernardo.moneywise.service.CategoryService;
 import com.bernardo.moneywise.service.TransactionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/transaction")
+@RequestMapping("/transactions")
 @RequiredArgsConstructor
 public class TransactionController {
 
@@ -54,7 +53,7 @@ public class TransactionController {
     public ResponseEntity<Page<TransactionResponseDTO>> search(
             @RequestParam(required = false) String category,
             @RequestParam(required = false) TransactionType type,
-            Pageable pageable) {
+            @PageableDefault(size = 10, sort = "id") Pageable pageable) {
 
         if (category != null) {
             return ResponseEntity.ok(transactionService.searchByCategory(category, pageable));
