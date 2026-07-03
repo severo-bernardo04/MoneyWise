@@ -16,7 +16,7 @@ A aplicação é totalmente containerizada com Docker, incluindo o banco de dado
 ## 🛠️ Tecnologias utilizadas
 
 - **Java 21**
-- **Spring Boot 3**
+- **Spring Boot 4**
     - Spring Web (REST)
     - Spring Data JPA
     - Spring Security
