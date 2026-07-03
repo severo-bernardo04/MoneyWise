@@ -5,14 +5,14 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: MoneyWiseDB
-      POSTGRES_USER: moneywise_user
-      POSTGRES_PASSWORD: moneywise_pass
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "1234"
     ports:
       - "5432:5432"
     volumes:
       - moneywise_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U moneywise_user -d MoneyWiseDB"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d MoneyWiseDB"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -28,8 +28,8 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       DB_NAME: MoneyWiseDB
-      DB_USER: moneywise_user
-      DB_PASSWORD: moneywise_pass
+      DB_USER: postgres
+      DB_PASSWORD: "1234"
       JWT_SECRET: 41432D4A614E645267556B58703273357638792F423F4528482B4D6251655468
       SERVER_PORT: 8080
     ports:
