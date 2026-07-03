@@ -7,12 +7,12 @@ import com.bernardo.moneywise.exceptions.ResourceNotFoundException;
 import com.bernardo.moneywise.model.Category;
 import com.bernardo.moneywise.model.Transaction;
 import com.bernardo.moneywise.repository.TransactionRepository;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
-@Data
+@Service
 @RequiredArgsConstructor
 public class TransactionService {
 
